@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+  node1:
+    build: .
+    working_dir: /workdir
+    shm_size: 250M
+    volumes:
+      - .:/workdir
+    command: python gray node
+  node2:
+    build: .
+    working_dir: /workdir
+    shm_size: 250M
+    volumes:
+      - .:/workdir
+    command: python gray node
+  driver:
+    build: .
+    working_dir: /workdir
+    volumes:
+      - .:/workdir
+    command: bash
+    depends_on:
+      - node1
+      - node2
